@@ -8,7 +8,7 @@ const album = require('./album');
 const upload = require('./upload');
 
 
-router.use('/home', home);
+router.use('/', home);
 
 router.use('/music', music);
 

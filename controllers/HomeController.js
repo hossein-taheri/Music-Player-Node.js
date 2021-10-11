@@ -1,7 +1,18 @@
+const ApiResponse = require("../helpers/responses/ApiResponse");
+const GlobalService = require("../services/GlobalService");
 const HomeController = {
-    index(req, res, next) {
+    async index(req, res, next) {
         try {
-            //TODO :: send All Index page info
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        newest: await GlobalService.getNewest(),
+                        favorites: await GlobalService.getFavorites(),
+                    }
+                )
         } catch (err) {
             next(err);
         }

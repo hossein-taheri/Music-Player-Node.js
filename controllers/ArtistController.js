@@ -1,34 +1,84 @@
+const ArtistService = require("../services/ArtistService");
+const ApiResponse = require("../helpers/responses/ApiResponse");
 const ArtistController = {
-    index(req, res, next) {
+    async index(req, res, next) {
         try {
-            //TODO :: send all musics with filter
+            const page = req.query.page || 1;
+
+            const artists = await ArtistService.index(page);
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        artists
+                    }
+                )
         } catch (err) {
             next(err);
         }
     },
-    show(req, res, next) {
+    async create(req, res, next) {
         try {
+            const artist = await ArtistService.create(
+                req.body.name,
+                req.body.image,
+            );
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        artist
+                    }
+                )
 
         } catch (err) {
             next(err);
         }
     },
-    create(req, res, next) {
+    async update(req, res, next) {
         try {
+            const artist = await ArtistService.update(
+                req.params.artist,
+                req.body.name,
+                req.body.image,
+            );
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        artist
+                    }
+                )
 
         } catch (err) {
             next(err);
         }
     },
-    update(req, res, next) {
+    async delete(req, res, next) {
         try {
+            const artist = await ArtistService.delete(
+                req.params.artist
+            );
 
-        } catch (err) {
-            next(err);
-        }
-    },
-    delete(req, res, next) {
-        try {
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        artist
+                    }
+                )
+
 
         } catch (err) {
             next(err);

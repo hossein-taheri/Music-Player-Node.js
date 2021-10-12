@@ -34,7 +34,6 @@ const GenreValidator = {
                     .max(250),
                 image: Joi
                     .string()
-                    .required()
                     .min(3)
                     .max(250),
             },
@@ -62,7 +61,6 @@ const GenreValidator = {
                     .max(250),
                 image: Joi
                     .string()
-                    .required()
                     .min(3)
                     .max(250),
             },

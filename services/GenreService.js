@@ -1,5 +1,4 @@
 const GenreRepository = require("../repositories/GenreRepository");
-const {NotFound} = require("../helpers/CustomErrors");
 
 
 const GenreService = {

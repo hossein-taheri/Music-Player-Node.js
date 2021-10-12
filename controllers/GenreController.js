@@ -1,34 +1,84 @@
+const GenreService = require("../services/GenreService");
+const ApiResponse = require("../helpers/responses/ApiResponse");
 const GenreController = {
-    index(req, res, next) {
+    async index(req, res, next) {
         try {
-            //TODO :: send all musics with filter
+            const page = req.query.page || 1;
+
+            const genres = await GenreService.index(page);
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        genres
+                    }
+                )
         } catch (err) {
             next(err);
         }
     },
-    show(req, res, next) {
+    async create(req, res, next) {
         try {
+            const genre = await GenreService.create(
+                req.body.name,
+                req.body.image,
+            );
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        genre
+                    }
+                )
 
         } catch (err) {
             next(err);
         }
     },
-    create(req, res, next) {
+    async update(req, res, next) {
         try {
+            const genre = await GenreService.update(
+                req.params.genre,
+                req.body.name,
+                req.body.image,
+            );
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        genre
+                    }
+                )
 
         } catch (err) {
             next(err);
         }
     },
-    update(req, res, next) {
+    async delete(req, res, next) {
         try {
+            const genre = await GenreService.delete(
+                req.params.genre
+            );
 
-        } catch (err) {
-            next(err);
-        }
-    },
-    delete(req, res, next) {
-        try {
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        genre
+                    }
+                )
+
 
         } catch (err) {
             next(err);

@@ -2,7 +2,6 @@ const Error = require('./Errors');
 
 const ApiResponse = {
     response: (req, res, status_code, messages, data) => {
-        console.log(status_code)
         return res.json({
             status: status_code,
             status_message: Error[status_code](),
@@ -11,7 +10,6 @@ const ApiResponse = {
         });
     },
     error: (req, res, err_code, ...err_messages) => {
-        console.log(err_messages)
         return ApiResponse
             .response(
                 req,
@@ -38,7 +36,7 @@ const ApiResponse = {
                     req,
                     res,
                     400,
-                    err.details[0].message
+                    ...err.details.map(detail => detail.message)
                 )
         } else {
             return ApiResponse

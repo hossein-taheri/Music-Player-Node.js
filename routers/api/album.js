@@ -7,9 +7,9 @@ router.get('/index', [AlbumValidator.index], AlbumController.index);
 
 router.post('/create', [AlbumValidator.create], AlbumController.create);
 
-router.post('/update/:music', [AlbumValidator.update], AlbumController.update);
+router.post('/update/:album', [AlbumValidator.update], AlbumController.update);
 
-router.post('/delete/:music', [AlbumValidator.delete], AlbumController.delete);
+router.post('/delete/:album', [AlbumValidator.delete], AlbumController.delete);
 
 
 module.exports = router;

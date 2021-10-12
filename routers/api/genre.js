@@ -7,9 +7,9 @@ router.get('/index', [GenreValidator.index], GenreController.index);
 
 router.post('/create', [GenreValidator.create], GenreController.create);
 
-router.post('/update/:music', [GenreValidator.update], GenreController.update);
+router.post('/update/:genre', [GenreValidator.update], GenreController.update);
 
-router.post('/delete/:music', [GenreValidator.delete], GenreController.delete);
+router.post('/delete/:genre', [GenreValidator.delete], GenreController.delete);
 
 
 module.exports = router;

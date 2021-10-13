@@ -1,35 +1,85 @@
+const ApiResponse = require("../helpers/responses/ApiResponse");
+const AlbumService = require("../services/AlbumService");
 const AlbumController = {
-    index(req, res, next) {
+    async index(req, res, next) {
         try {
-            //TODO :: send all musics with filter
+            const page = req.query.page || 1;
+
+            const albums = await AlbumService.index(page);
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        albums
+                    }
+                )
         } catch (err) {
             next(err);
         }
     },
-    show(req, res, next) {
+    async create(req, res, next) {
         try {
+            const album = await AlbumService.create(
+                req.body.name,
+                req.body.image,
+                req.body.year,
+                req.body.musics,
+            );
 
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        album
+                    }
+                )
         } catch (err) {
             next(err);
         }
     },
-    create(req, res, next) {
+    async update(req, res, next) {
         try {
+            const album = await AlbumService.update(
+                req.params.album,
+                req.body.name,
+                req.body.image,
+                req.body.year,
+                req.body.musics,
+            );
 
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        album
+                    }
+                )
         } catch (err) {
             next(err);
         }
     },
-    update(req, res, next) {
+    async delete(req, res, next) {
         try {
+            const album = await AlbumService.delete(
+                req.params.album
+            );
 
-        } catch (err) {
-            next(err);
-        }
-    },
-    delete(req, res, next) {
-        try {
-
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        album
+                    }
+                )
         } catch (err) {
             next(err);
         }

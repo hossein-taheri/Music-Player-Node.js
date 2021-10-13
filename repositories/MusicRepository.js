@@ -1,5 +1,6 @@
 const db = require("../models");
 const sequelize = require("sequelize");
+const {NotFound} = require("../helpers/CustomErrors");
 const {InternalServerErrors} = require("../helpers/CustomErrors");
 const {Op} = require("sequelize");
 const MUSIC_PER_PAGE = process.env.MUSIC_PER_PAGE || 12;
@@ -10,7 +11,14 @@ const MusicRepository = {
             limit: MUSIC_PER_PAGE,
             order: [
                 ['id', 'DESC']
-            ]
+            ],
+            include: [{
+                model: db.Artist,
+                attributes: [
+                    'id',
+                    'name',
+                ],
+            }]
         });
     },
     async getFavorites() {
@@ -18,7 +26,14 @@ const MusicRepository = {
             limit: MUSIC_PER_PAGE,
             order: [
                 ['loadedCount', 'DESC']
-            ]
+            ],
+            include: [{
+                model: db.Artist,
+                attributes: [
+                    'id',
+                    'name',
+                ],
+            }]
         });
     },
     async findAllByArtistGenreAlbum(page, artists, genres, albums, order) {
@@ -88,6 +103,13 @@ const MusicRepository = {
                 'image',
                 'loadedCount'
             ],
+            include: [{
+                model: db.Artist,
+                attributes: [
+                    'id',
+                    'name',
+                ],
+            }],
             offset: (page - 1) * MUSIC_PER_PAGE,
             limit: MUSIC_PER_PAGE,
             order: order,
@@ -98,7 +120,23 @@ const MusicRepository = {
         return db.Music.findOne({
             where: {
                 id
-            }
+            },
+            include: [
+                {
+                    model: db.Artist,
+                    attributes: [
+                        'id',
+                        'name',
+                    ],
+                },
+                {
+                    model: db.Genre,
+                    attributes: [
+                        'id',
+                        'name',
+                    ],
+                }
+            ],
         })
     },
     async create(name, link, year, lyric, image, artists, genres) {
@@ -132,6 +170,10 @@ const MusicRepository = {
                 id
             }
         })
+
+        if (!music)
+            throw new NotFound("Music not found");
+
 
         await db.MusicArtist.destroy({
             where: {

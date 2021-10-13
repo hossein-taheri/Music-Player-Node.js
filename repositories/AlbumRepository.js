@@ -60,13 +60,17 @@ const AlbumRepository = {
             }
         })
 
+        if (!album)
+            throw new NotFound("Album not found");
+
+
         await db.MusicAlbum.destroy({
             where: {
                 albumId: id
             }
         })
 
-        
+
 
         await album.addMusics(musics)
 

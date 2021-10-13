@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         year: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         image: {
             type: Sequelize.STRING,

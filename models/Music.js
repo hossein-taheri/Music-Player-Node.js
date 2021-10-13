@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         year: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         lyric: {
             type: Sequelize.TEXT,

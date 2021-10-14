@@ -6,12 +6,7 @@ const GenreValidator = {
         Validate(req,
             {},
             {},
-            {
-                page: Joi
-                    .number()
-                    .required()
-                    .min(1),
-            })
+            {})
             .then(req => {
                 next()
             })

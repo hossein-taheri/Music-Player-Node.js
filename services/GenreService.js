@@ -2,8 +2,8 @@ const GenreRepository = require("../repositories/GenreRepository");
 
 
 const GenreService = {
-    async index(page) {
-        return await GenreRepository.findAll(page);
+    async index() {
+        return await GenreRepository.findAll();
     },
     async create(name, image) {
         return await GenreRepository.create(name, image);

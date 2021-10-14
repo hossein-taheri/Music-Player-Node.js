@@ -5,7 +5,11 @@ const ArtistController = {
         try {
             const page = req.query.page || 1;
 
-            const artists = await ArtistService.index(page);
+            const {
+                artists,
+                pageCount,
+                musicsCount,
+            } = await ArtistService.index(page);
 
             return ApiResponse
                 .message(
@@ -13,7 +17,10 @@ const ArtistController = {
                     res,
                     null,
                     {
-                        artists
+                        artists,
+                        musicsCount,
+                        pageCount,
+                        page: req.query.page,
                     }
                 )
         } catch (err) {

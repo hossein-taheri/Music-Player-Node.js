@@ -94,7 +94,10 @@ const MusicRepository = {
         }
 
 
-        return await db.Music.findAll({
+        const musicsCount = await db.Music.count({
+            where
+        })
+        const musics = await db.Music.findAll({
             attributes: [
                 'id',
                 'name',
@@ -115,6 +118,11 @@ const MusicRepository = {
             order: order,
             where
         })
+        return {
+            musics,
+            musicsCount,
+            pageCount: Math.ceil(musicsCount / MUSIC_PER_PAGE)
+        }
     },
     async findOneById(id) {
         return db.Music.findOne({

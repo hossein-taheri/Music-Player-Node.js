@@ -1,7 +1,7 @@
 const ArtistRepository = require("../repositories/ArtistRepository");
 
 
-const GenreService = {
+const ArtistService = {
     async index(page) {
         return await ArtistRepository.findAll(page);
     },
@@ -16,4 +16,4 @@ const GenreService = {
     }
 }
 
-module.exports = GenreService;
+module.exports = ArtistService;

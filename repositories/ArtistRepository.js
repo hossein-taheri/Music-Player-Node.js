@@ -4,10 +4,18 @@ const ARTIST_PER_PAGE = process.env.GENRE_PER_PAGE || 12;
 
 const ArtistRepository = {
     async findAll(page) {
-        return await db.Artist.findAll({
+        const artistsCount = await db.Artist.count()
+
+        const artists = await db.Artist.findAll({
             offset: (page - 1) * ARTIST_PER_PAGE,
             limit: ARTIST_PER_PAGE
         })
+
+        return {
+            artists,
+            artistsCount,
+            pageCount: Math.ceil(artistsCount / ARTIST_PER_PAGE)
+        }
     },
     async create(name, image) {
         return await db.Artist.create({

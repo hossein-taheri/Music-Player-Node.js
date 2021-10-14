@@ -3,7 +3,11 @@ const ApiResponse = require("../helpers/responses/ApiResponse");
 const MusicController = {
     async index(req, res, next) {
         try {
-            const musics = await MusicService.index(
+            const {
+                musics,
+                pageCount,
+                musicsCount,
+            } = await MusicService.index(
                 req.query.page,
                 req.query.artists,
                 req.query.genres,
@@ -17,7 +21,10 @@ const MusicController = {
                     res,
                     null,
                     {
-                        musics
+                        musics,
+                        musicsCount,
+                        pageCount,
+                        page: req.query.page,
                     }
                 )
         } catch (err) {

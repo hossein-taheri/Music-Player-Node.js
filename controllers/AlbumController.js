@@ -5,7 +5,11 @@ const AlbumController = {
         try {
             const page = req.query.page || 1;
 
-            const albums = await AlbumService.index(page);
+            const {
+                albums,
+                pageCount,
+                musicsCount,
+            } = await AlbumService.index(page);
 
             return ApiResponse
                 .message(
@@ -13,7 +17,10 @@ const AlbumController = {
                     res,
                     null,
                     {
-                        albums
+                        albums,
+                        musicsCount,
+                        pageCount,
+                        page: req.query.page,
                     }
                 )
         } catch (err) {

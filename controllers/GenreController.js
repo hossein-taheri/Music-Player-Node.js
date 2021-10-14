@@ -3,9 +3,7 @@ const ApiResponse = require("../helpers/responses/ApiResponse");
 const GenreController = {
     async index(req, res, next) {
         try {
-            const page = req.query.page || 1;
-
-            const genres = await GenreService.index(page);
+            const genres = await GenreService.index();
 
             return ApiResponse
                 .message(

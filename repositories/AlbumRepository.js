@@ -5,10 +5,19 @@ const ALBUM_PER_PAGE = process.env.ALBUM_PER_PAGE || 12;
 
 const AlbumRepository = {
     async findAll(page) {
-        return await db.Album.findAll({
+        const albumsCount = await db.Music.count({})
+
+        const albums = await db.Album.findAll({
             offset: (page - 1) * ALBUM_PER_PAGE,
             limit: ALBUM_PER_PAGE
         })
+
+        return {
+            albums,
+            albumsCount,
+            pageCount: Math.ceil(albumsCount / ALBUM_PER_PAGE)
+        }
+
     },
     async show(id) {
         return await db.Album.findOne({
@@ -69,7 +78,6 @@ const AlbumRepository = {
                 albumId: id
             }
         })
-
 
 
         await album.addMusics(musics)

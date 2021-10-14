@@ -4,11 +4,8 @@ const {NotFound} = require("../helpers/CustomErrors");
 const GENRE_PER_PAGE = process.env.GENRE_PER_PAGE || 12;
 
 const GenreRepository = {
-    async findAll(page) {
-        return await db.Genre.findAll({
-            offset: (page - 1) * GENRE_PER_PAGE,
-            limit: GENRE_PER_PAGE
-        })
+    async findAll() {
+        return await db.Genre.findAll();
     },
     async create(name, image) {
         return await db.Genre.create({

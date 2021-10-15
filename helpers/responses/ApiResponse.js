@@ -2,6 +2,7 @@ const Error = require('./Errors');
 
 const ApiResponse = {
     response: (req, res, status_code, messages, data) => {
+        console.log(status_code)
         return res.json({
             status: status_code,
             status_message: Error[status_code](),

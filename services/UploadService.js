@@ -7,6 +7,16 @@ const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE) || 104857600;
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
         switch (path.extname(file.originalname)) {
+            case '.jpg':
+            case '.jpeg':
+            case '.bmp':
+            case '.tif':
+            case '.tiff':
+            case '.gif':
+            case '.png':
+                file.type = 'Image';
+                callback(null, appDir + '/public/images');
+                break;
             case '.mp3':
             case '.m4a':
             case '.ogg':
@@ -14,7 +24,7 @@ const storage = multer.diskStorage({
             case '.wav':
             case '.wma':
                 file.type = 'Audio';
-                callback(null, appDir + '/public/uploads/audios');
+                callback(null, appDir + '/public/audios');
                 break;
             default :
                 callback(new BadRequest("File format is not correct"));

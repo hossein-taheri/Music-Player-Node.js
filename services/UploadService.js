@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
             case '.gif':
             case '.png':
                 file.type = 'Image';
+                file['original-name'] = file.originalname;
                 callback(null, appDir + '/public/images');
                 break;
             case '.mp3':
@@ -24,6 +25,7 @@ const storage = multer.diskStorage({
             case '.wav':
             case '.wma':
                 file.type = 'Audio';
+                file['original-name'] = file.originalname.replace( path.extname(file.originalname), '');
                 callback(null, appDir + '/public/audios');
                 break;
             default :
@@ -31,7 +33,7 @@ const storage = multer.diskStorage({
         }
     },
     filename: (req, file, callback) => {
-        callback(null, file.originalname + '-' + Date.now() + path.extname(file.originalname));
+        callback(null, file['original-name'] + '-' + Date.now() + path.extname(file.originalname));
     }
 })
 const upload = multer({

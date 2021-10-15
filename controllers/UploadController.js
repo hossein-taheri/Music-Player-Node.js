@@ -18,6 +18,7 @@ const upload = async (req, res, next) => {
                     {
                         type: req.file.type,
                         name: req.file.filename,
+                        'original-name': req.file['original-name'],
                         path
                     }
                 )

@@ -1,14 +1,9 @@
 const db = require("../models");
 const MusicRepository = require("../repositories/MusicRepository");
+const GlobalService = require("./GlobalService");
 const {NotFound} = require("../helpers/CustomErrors");
 
 const MusicService = {
-    async getNewest() {
-        return await MusicRepository.getNewest();
-    },
-    async getFavorites() {
-        return await MusicRepository.getFavorites();
-    },
     async index(page, artists, genres, albums, order) {
         if (!order) {
             order = "newest";
@@ -25,13 +20,25 @@ const MusicService = {
         return music;
     },
     async create(name, link, year, lyric, image, artists, genres) {
-        return await MusicRepository.create(name, link, year, lyric, image, artists, genres);
+        let music = await MusicRepository.create(name, link, year, lyric, image, artists, genres);
+
+        await GlobalService.clearNewestFavorites();
+
+        return music;
     },
     async update(id, name, link, year, lyric, image, artists, genres) {
-        return await MusicRepository.update(id, name, link, year, lyric, image, artists, genres);
+        let music = await MusicRepository.update(id, name, link, year, lyric, image, artists, genres);
+
+        await GlobalService.clearNewestFavorites();
+
+        return music;
     },
     async delete(id) {
-        return await MusicRepository.delete(id);
+        let music = await MusicRepository.delete(id);
+
+        await GlobalService.clearNewestFavorites();
+
+        return music;
     }
 }
 

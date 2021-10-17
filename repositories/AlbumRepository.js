@@ -28,6 +28,7 @@ const AlbumRepository = {
                 model: db.Music,
                 required: false,
                 attributes: [
+                    'id',
                     'name',
                     'link',
                     'year',
@@ -38,6 +39,7 @@ const AlbumRepository = {
                     model: db.Artist,
                     required: false,
                     attributes: [
+                        'id',
                         'name'
                     ],
                 }]

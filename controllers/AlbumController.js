@@ -49,6 +49,25 @@ const AlbumController = {
             next(err);
         }
     },
+    async show(req, res, next) {
+        try {
+            const album = await AlbumService.show(
+                req.params.album
+            );
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        album
+                    }
+                )
+        } catch (err) {
+            next(err);
+        }
+    },
     async update(req, res, next) {
         try {
             const album = await AlbumService.update(

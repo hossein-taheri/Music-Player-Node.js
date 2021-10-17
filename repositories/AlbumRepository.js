@@ -19,13 +19,14 @@ const AlbumRepository = {
         }
 
     },
-    async show(id) {
+    async findOneById(id) {
         return await db.Album.findOne({
             where: {
                 id
             },
             include: [{
                 model: db.Music,
+                required: false,
                 attributes: [
                     'name',
                     'link',
@@ -35,6 +36,7 @@ const AlbumRepository = {
                 ],
                 include: [{
                     model: db.Artist,
+                    required: false,
                     attributes: [
                         'name'
                     ],

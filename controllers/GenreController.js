@@ -39,6 +39,26 @@ const GenreController = {
             next(err);
         }
     },
+    async show(req, res, next) {
+        try {
+            const genre = await GenreService.show(
+                req.params.genre
+            );
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        genre
+                    }
+                )
+
+        } catch (err) {
+            next(err);
+        }
+    },
     async update(req, res, next) {
         try {
             const genre = await GenreService.update(

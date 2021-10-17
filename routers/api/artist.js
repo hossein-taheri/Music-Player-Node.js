@@ -7,6 +7,8 @@ router.get('/index', [ArtistValidator.index], ArtistController.index);
 
 router.post('/create', [ArtistValidator.create], ArtistController.create);
 
+router.get('/show/:artist', [ArtistValidator.show], ArtistController.show);
+
 router.post('/update/:artist', [ArtistValidator.update], ArtistController.update);
 
 router.post('/delete/:artist', [ArtistValidator.delete], ArtistController.delete);

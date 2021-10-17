@@ -64,6 +64,28 @@ const AlbumValidator = {
                     )
             })
     },
+    show: (req, res, next) => {
+        Validate(req,
+            {},
+            {
+                album: Joi
+                    .number()
+                    .required()
+                    .min(1),
+            },
+            {})
+            .then(req => {
+                next()
+            })
+            .catch(err => {
+                return ApiResponse
+                    .JoiError(
+                        req,
+                        res,
+                        err
+                    )
+            })
+    },
     update: (req, res, next) => {
         Validate(req,
             {

@@ -48,6 +48,26 @@ const ArtistController = {
             next(err);
         }
     },
+    async show(req, res, next) {
+        try {
+            const artist = await ArtistService.show(
+                req.params.artist
+            );
+
+            return ApiResponse
+                .message(
+                    req,
+                    res,
+                    null,
+                    {
+                        artist
+                    }
+                )
+
+        } catch (err) {
+            next(err);
+        }
+    },
     async update(req, res, next) {
         try {
             const artist = await ArtistService.update(

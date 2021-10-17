@@ -13,6 +13,13 @@ const GenreRepository = {
             image
         })
     },
+    async findOneById(id) {
+        return await db.Genre.findOne({
+            where: {
+                id
+            }
+        })
+    },
     async update(id, name, image) {
         const genre = await db.Genre.update({
             name,

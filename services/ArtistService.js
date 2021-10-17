@@ -8,6 +8,9 @@ const ArtistService = {
     async create(name, image) {
         return await ArtistRepository.create(name, image);
     },
+    async show(id) {
+        return await ArtistRepository.findOneById(id);
+    },
     async update(id, name, image) {
         return await ArtistRepository.update(id, name, image);
     },

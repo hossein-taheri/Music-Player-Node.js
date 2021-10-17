@@ -8,6 +8,9 @@ const AlbumService = {
     async create(name, image, year, musics) {
         return await AlbumRepository.create(name, image, year, musics);
     },
+    async show(id) {
+        return await AlbumRepository.findOneById(id);
+    },
     async update(id, name, image, year, musics) {
         return await AlbumRepository.update(id, name, image, year, musics);
     },

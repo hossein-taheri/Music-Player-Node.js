@@ -23,6 +23,13 @@ const ArtistRepository = {
             image
         })
     },
+    async findOneById(id) {
+        return await db.Artist.findOne({
+            where: {
+                id
+            }
+        })
+    },
     async update(id, name, image) {
         const artist = await db.Artist.update({
             name,

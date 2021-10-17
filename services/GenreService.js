@@ -8,6 +8,9 @@ const GenreService = {
     async create(name, image) {
         return await GenreRepository.create(name, image);
     },
+    async show(id) {
+        return await GenreRepository.findOneById(id);
+    },
     async update(id, name, image) {
         return await GenreRepository.update(id, name, image);
     },

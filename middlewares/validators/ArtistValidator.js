@@ -51,6 +51,28 @@ const ArtistValidator = {
                     )
             })
     },
+    show: (req, res, next) => {
+        Validate(req,
+            {},
+            {
+                artist: Joi
+                    .number()
+                    .required()
+                    .min(1),
+            },
+            {})
+            .then(req => {
+                next()
+            })
+            .catch(err => {
+                return ApiResponse
+                    .JoiError(
+                        req,
+                        res,
+                        err
+                    )
+            })
+    },
     update: (req, res, next) => {
         Validate(req,
             {

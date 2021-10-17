@@ -9,7 +9,24 @@ const AlbumRepository = {
 
         const albums = await db.Album.findAll({
             offset: (page - 1) * ALBUM_PER_PAGE,
-            limit: ALBUM_PER_PAGE
+            limit: ALBUM_PER_PAGE,
+            include: [
+                {
+                    model: db.Music,
+                    attributes: [
+                        'id',
+                        'name',
+                        'link',
+                    ],
+                    include: [{
+                        model: db.Artist,
+                        attributes: [
+                            'id',
+                            'name',
+                        ],
+                    }],
+                }
+            ]
         })
 
         return {

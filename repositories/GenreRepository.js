@@ -1,7 +1,6 @@
 const db = require("../models");
 const {InternalServerErrors} = require("../helpers/CustomErrors");
 const {NotFound} = require("../helpers/CustomErrors");
-const GENRE_PER_PAGE = process.env.GENRE_PER_PAGE || 12;
 
 const GenreRepository = {
     async findAll() {

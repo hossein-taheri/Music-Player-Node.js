@@ -3,8 +3,8 @@ const db = require("../models");
 db
     .sequelize
     .sync({
-        force: false,// TODO :: remove in production
-        logging : false
+        force: false,
+        logging: false
     })
     .then(() => {
         console.log("Successfully connected to database");

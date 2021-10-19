@@ -1,6 +1,6 @@
 const db = require("../models");
 const {InternalServerErrors} = require("../helpers/CustomErrors");
-const ARTIST_PER_PAGE = process.env.GENRE_PER_PAGE || 12;
+const ARTIST_PER_PAGE = parseInt(process.env.ARTIST_PER_PAGE) || 12;
 
 const ArtistRepository = {
     async findAll(page) {

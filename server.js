@@ -8,10 +8,7 @@ require('./bootstrap/request')(app);
 require('./bootstrap/dotenv');
 
 //database config
-require('./bootstrap/database');
-
-//global config
-require('./bootstrap/global');
+require('./bootstrap/database')();
 
 //routing config
 require('./bootstrap/router')(app);

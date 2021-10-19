@@ -1,6 +1,6 @@
 const GlobalService = require("../services/GlobalService");
 
-(async function () {
+module.exports = async function () {
     try {
 
         await GlobalService.getNewest();
@@ -11,5 +11,4 @@ const GlobalService = require("../services/GlobalService");
         console.log(err)
         process.exit(-1)
     }
-
-})()
+}

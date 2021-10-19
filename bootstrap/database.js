@@ -1,14 +1,22 @@
 const db = require("../models");
+//global variables config
+const global = require('./global');
 
-db
-    .sequelize
-    .sync({
-        force: false,
-        logging: false
-    })
-    .then(() => {
+module.exports = async () => {
+    try {
+        await db
+            .sequelize
+            .sync({
+                force: false,
+                logging: false
+            })
         console.log("Successfully connected to database");
-    })
-    .catch(err => {
+
+        await global();
+
+    } catch (err) {
         console.log("Database Error :", err.message)
-    });
+        process.exit();
+    }
+}
+

@@ -3,7 +3,7 @@ const sequelize = require("sequelize");
 const {NotFound} = require("../helpers/CustomErrors");
 const {InternalServerErrors} = require("../helpers/CustomErrors");
 const {Op} = require("sequelize");
-const MUSIC_PER_PAGE = process.env.MUSIC_PER_PAGE || 12;
+const MUSIC_PER_PAGE = parseInt(process.env.MUSIC_PER_PAGE) || 12;
 
 const MusicRepository = {
     async getNewest() {

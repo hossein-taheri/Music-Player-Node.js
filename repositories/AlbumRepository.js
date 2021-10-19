@@ -1,7 +1,7 @@
 const db = require("../models");
 const {InternalServerErrors} = require("../helpers/CustomErrors");
 const {NotFound} = require("../helpers/CustomErrors");
-const ALBUM_PER_PAGE = process.env.ALBUM_PER_PAGE || 12;
+const ALBUM_PER_PAGE = parseInt(process.env.ALBUM_PER_PAGE) || 12;
 
 const AlbumRepository = {
     async findAll(page) {
